@@ -77,12 +77,13 @@ class Model implements \JsonSerializable {
 
 	/**
 	 * The ID of the model.
+	 * This needs to be null in order for MySQL to auto-increment correctly if the NO_AUTO_VALUE_ON_ZERO SQL mode is enabled.
 	 *
 	 * @since 4.2.7
 	 *
-	 * @var int
+	 * @var int|null
 	 */
-	public $id = 0;
+	public $id = null;
 
 	/**
 	 * An array of columns from the DB that we can use.
@@ -469,55 +470,5 @@ class Model implements \JsonSerializable {
 		}
 
 		return self::$columns[ get_called_class() ];
-	}
-
-	/**
-	 * Returns a JSON object with default schema options.
-	 *
-	 * @since 4.0.0
-	 *
-	 * @param  string $existingOptions The existing options in JSON.
-	 * @return string                  The existing options with defaults added in JSON.
-	 */
-	public static function getDefaultSchemaOptions( $existingOptions = '' ) {
-		// If the root level value for a graph needs to be an object, we need to set at least one property inside of it so that PHP doesn't convert it to an empty array.
-
-		$defaults = [
-			'article'  => [
-				'articleType' => 'BlogPosting'
-			],
-			'course'   => [
-				'name'        => '',
-				'description' => '',
-				'provider'    => ''
-			],
-			'faq'      => [
-				'pages' => []
-			],
-			'product'  => [
-				'reviews' => []
-			],
-			'recipe'   => [
-				'ingredients'  => [],
-				'instructions' => [],
-				'keywords'     => []
-			],
-			'software' => [
-				'reviews'          => [],
-				'operatingSystems' => []
-			],
-			'webPage'  => [
-				'webPageType' => 'WebPage'
-			]
-		];
-
-		if ( empty( $existingOptions ) ) {
-			return wp_json_encode( $defaults );
-		}
-
-		$existingOptions = json_decode( $existingOptions, true );
-		$existingOptions = array_replace_recursive( $defaults, $existingOptions );
-
-		return wp_json_encode( $existingOptions );
 	}
 }

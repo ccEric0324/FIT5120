@@ -13,6 +13,14 @@ const addBlockEditorDynamicStyles = ( styleTagId, styling ) => {
 			cloneEditorStaticCSSStylesTag = editorStaticCSSStylesTag.cloneNode( true );
 		}
 
+		const editorProStaticCSSStylesTag = document.getElementById( 'spectra-pro-editor-styles' );
+		let cloneEditorProStaticCSSStylesTag = false;
+
+		if ( editorProStaticCSSStylesTag ) {
+
+			cloneEditorProStaticCSSStylesTag = editorProStaticCSSStylesTag.cloneNode( true );
+		}
+
 		// Dashicons Editor CSS.
 
 		const editorDashiconsCSSStylesTag = document.getElementById( 'dashicons-css' );
@@ -48,7 +56,7 @@ const addBlockEditorDynamicStyles = ( styleTagId, styling ) => {
 		}
 
 		// Slick CSS Ends.
-		
+
 		// swiper CSS.
 		const swiperStaticCSSStylesTag = document.getElementById( 'uagb-swiper-css-css' );
 		let cloneSwiperStaticCSSStylesTag = false;
@@ -132,6 +140,15 @@ const addBlockEditorDynamicStyles = ( styleTagId, styling ) => {
 					iframeDocument.head.removeChild( iframeEditorStaticCSSStylesTag );
 				}
 				iframeDocument.head.appendChild( cloneEditorStaticCSSStylesTag );
+			}
+
+			// Static Pro Editor CSS.
+			if ( cloneEditorProStaticCSSStylesTag ) {
+				const iframeEditorProStaticCSSStylesTag = iframeDocument.getElementById( 'spectra-pro-editor-styles' );
+				if ( iframeEditorProStaticCSSStylesTag ) {
+					iframeDocument.head.removeChild( iframeEditorProStaticCSSStylesTag );
+				}
+				iframeDocument.head.appendChild( cloneEditorProStaticCSSStylesTag );
 			}
 
 			// Dashicons CSS.

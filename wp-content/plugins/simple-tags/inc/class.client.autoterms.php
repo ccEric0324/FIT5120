@@ -182,7 +182,7 @@ class SimpleTags_Client_Autoterms {
 
 						// Whole word ?
 						if ( isset( $options['autoterm_word'] ) && (int) $options['autoterm_word'] == 1 ) {
-							if(strpos($content, ' '.$term.' ') !== FALSE)
+							if ( preg_match("/\b" . preg_quote($term) . "\b/i", $content ) )
 							{
 								$terms_to_add[] = $term;
 							}
@@ -261,7 +261,7 @@ class SimpleTags_Client_Autoterms {
 
 						// Whole word ?
 						if ( isset( $options['autoterm_word'] ) && (int) $options['autoterm_word'] == 1 ) {
-							if(strpos($content, ' '.$term.' ') !== FALSE)
+							if ( preg_match("/\b" . preg_quote($term) . "\b/i", $content ) )
 							{
 								$terms_to_add[] = $term;
 							}
@@ -312,7 +312,7 @@ class SimpleTags_Client_Autoterms {
 
 				// Whole word ?
 				if ( isset( $options['autoterm_word'] ) && (int)$options['autoterm_word'] === 1 ) {
-					if(strpos($content, ' '.$term.' ') !== FALSE)
+					if ( preg_match("/\b" . preg_quote($term) . "\b/i", $content ) )
 					{
 						$terms_to_add[] = $term;
 					}
@@ -369,7 +369,7 @@ class SimpleTags_Client_Autoterms {
 
 				// Whole word ?
 				if ( isset( $options['autoterm_word'] ) && (int) $options['autoterm_word'] == 1 ) {
-					if(strpos($content, ' '.$term.' ') !== FALSE)
+					if ( preg_match("/\b" . preg_quote($term) . "\b/i", $content ) )
 					{
 						$terms_to_add[] = $term;
 					}
@@ -452,7 +452,7 @@ class SimpleTags_Client_Autoterms {
 	 */
 	public static function update_taxopress_logs( $object, $taxonomy = 'post_tag', $options = array(), $counter = false, $action = 'save_posts', $component = 'st_autoterms', $terms_to_add = [], $status = 'failed', $status_message = 'not_provided' ) {
 
-        if (get_option('taxopress_autoterms_logs_disabled')) {
+        if (get_option('taxopress_autoterms_logs_disabled') || !post_type_exists('taxopress_logs')) {
             return;
         }
 
@@ -481,7 +481,7 @@ class SimpleTags_Client_Autoterms {
 		$current_logs_counts = wp_count_posts('taxopress_logs');
         $current_logs_count = isset($current_logs_counts->publish) ? $current_logs_counts->publish : 0;
 
-        if((int)$current_logs_count > $auto_terms_logs_limit){
+        if(isset($current_logs_counts->publish) && (int)$current_logs_count > $auto_terms_logs_limit){
             $posts = get_posts(array(
                 'post_type' => 'taxopress_logs',
                 'post_status' => 'publish',

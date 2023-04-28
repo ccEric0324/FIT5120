@@ -228,6 +228,9 @@ UAGBTableOfContents = { // eslint-disable-line no-undef
 			return decodeURI( encodeURIComponent( parsedSlug ) );
 		};
 		const $thisScope = document.querySelector( id );
+		if( ! $thisScope ){
+			return;
+		}
 		if ( $thisScope.querySelector( '.uag-toc__collapsible-wrap' ) !== null ){
 			if ( $thisScope.querySelector( '.uag-toc__collapsible-wrap' ).length > 0 ) {
 				$thisScope.querySelector( '.uagb-toc__title-wrap' ).classList.add( 'uagb-toc__is-collapsible' );
@@ -249,7 +252,9 @@ UAGBTableOfContents = { // eslint-disable-line no-undef
 
 		if ( 0 !== allHeader.length ) {
 			const tocListWrap = $thisScope.querySelector( '.uagb-toc__list-wrap' );
-
+			if( ! tocListWrap ) {
+				return;
+			}
 			const divsArr = Array.from( allHeader );
 			/* Logic for Remove duplicate heading with same HTML tag and create an new array with duplicate entries start here. */
 			const ArrayOfDuplicateElements = function ( headingArray = [] ) {

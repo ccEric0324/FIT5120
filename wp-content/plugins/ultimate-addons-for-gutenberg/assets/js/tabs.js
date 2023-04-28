@@ -1,6 +1,9 @@
 UAGBTabs = { // eslint-disable-line no-undef
 	init( $selector ) {
 		const tabsWrap = document.querySelector( $selector );
+		if( ! tabsWrap ){
+			return;
+		}
 		const tabActive = tabsWrap.getAttribute( 'data-tab-active' );
 		const tabLi = tabsWrap.querySelectorAll(
 			'.uagb-tabs__panel > li.uagb-tab'
@@ -59,7 +62,8 @@ UAGBTabs = { // eslint-disable-line no-undef
 		// Remove old li active class.
 		tabPanel
 			.querySelector( '.uagb-tabs__active' )
-			.classList.remove( 'uagb-tabs__active' );
+			?.classList.remove( 'uagb-tabs__active' );
+
 
 		//Remove old tab body active class.
 		document
@@ -67,7 +71,7 @@ UAGBTabs = { // eslint-disable-line no-undef
 				mainWrapClass +
 					' > .uagb-tabs__body-wrap > .uagb-tabs-body__active'
 			)
-			.classList.remove( 'uagb-tabs-body__active' );
+			?.classList.remove( 'uagb-tabs-body__active' );
 
 		// Set aria-selected attribute as flase for old active tab.
 		for ( let i = 0; i < allLi.length; i++ ) {
@@ -81,10 +85,10 @@ UAGBTabs = { // eslint-disable-line no-undef
 		tabName.setAttribute( 'aria-selected', true );
 
 		// Set selected tab body active class.
-		tabSelectedBody.classList.add( 'uagb-tabs-body__active' );
+		tabSelectedBody?.classList.add( 'uagb-tabs-body__active' );
 
 		// Set aria-hidden attribute false for selected tab body.
-		tabSelectedBody.setAttribute( 'aria-hidden', false );
+		tabSelectedBody?.setAttribute( 'aria-hidden', false );
 
 		// Set aria-hidden attribute true for all unselected tab body.
 		for ( let i = 0; i < tabUnselectedBody.length; i++ ) {

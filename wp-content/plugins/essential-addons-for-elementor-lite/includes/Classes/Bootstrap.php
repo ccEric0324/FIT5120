@@ -110,10 +110,10 @@ class Bootstrap
         // extensions classmap
         $this->registered_extensions = apply_filters('eael/registered_extensions', $GLOBALS['eael_config']['extensions']);
 
-        // start plugin tracking
-        if (!$this->pro_enabled) {
-            // $this->start_plugin_tracking();
-        }
+	    // start plugin tracking
+	    if ( ! $this->pro_enabled ) {
+		    $this->start_plugin_tracking();
+	    }
 
         // register extensions
         $this->register_extensions();
@@ -204,9 +204,9 @@ class Bootstrap
         //rank math support
         add_filter('rank_math/researches/toc_plugins', [$this, 'toc_rank_math_support']);
 
-        if(defined('WPML_TM_VERSION')){
-	        add_filter( 'elementor/documents/get/post_id',[$this, 'eael_wpml_template_translation']);
-        }
+//        if(defined('WPML_TM_VERSION')){
+//	        add_filter( 'elementor/documents/get/post_id',[$this, 'eael_wpml_template_translation']);
+//        }
 
 
         //templately plugin support

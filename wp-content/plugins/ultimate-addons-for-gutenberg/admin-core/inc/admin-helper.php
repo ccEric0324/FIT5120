@@ -47,6 +47,7 @@ class Admin_Helper {
 			'enable_file_generation'             => \UAGB_Admin_Helper::get_admin_settings_option( '_uagb_allow_file_generation', 'enabled' ),
 			'blocks_activation_and_deactivation' => self::get_blocks(),
 			'enable_templates_button'            => \UAGB_Admin_Helper::get_admin_settings_option( 'uag_enable_templates_button', 'yes' ),
+			'enable_on_page_css_button'          => \UAGB_Admin_Helper::get_admin_settings_option( 'uag_enable_on_page_css_button', 'yes' ),
 			'enable_block_condition'             => \UAGB_Admin_Helper::get_admin_settings_option( 'uag_enable_block_condition', 'disabled' ),
 			'enable_masonry_gallery'             => \UAGB_Admin_Helper::get_admin_settings_option( 'uag_enable_masonry_gallery', 'enabled' ),
 			'enable_block_responsive'            => \UAGB_Admin_Helper::get_admin_settings_option( 'uag_enable_block_responsive', 'enabled' ),
@@ -77,6 +78,7 @@ class Admin_Helper {
 			'recaptcha_secret_key_v2'            => \UAGB_Admin_Helper::get_admin_settings_option( 'uag_recaptcha_secret_key_v2', '' ),
 			'recaptcha_site_key_v3'              => \UAGB_Admin_Helper::get_admin_settings_option( 'uag_recaptcha_site_key_v3', '' ),
 			'recaptcha_secret_key_v3'            => \UAGB_Admin_Helper::get_admin_settings_option( 'uag_recaptcha_secret_key_v3', '' ),
+			'insta_linked_accounts'              => \UAGB_Admin_Helper::get_admin_settings_option( 'uag_insta_linked_accounts', array() ),
 		);
 
 		return $options;

@@ -310,7 +310,7 @@ if ( isset($_GET['taxonomy_type']) && $_GET['taxonomy_type'] === 'all' ) {
 
                 <?php
                 if ($external_edit) {
-                    echo '<input type="hidden" name="taxonomy_external_edit" class="taxonomy_external_edit" value="1" />';
+                    echo '<input type="hidden" name="taxonomy_external_edit" aria-current="false" class="taxonomy_external_edit" value="1" />';
                 }
                 ?>
 
@@ -336,57 +336,57 @@ if ( isset($_GET['taxonomy_type']) && $_GET['taxonomy_type'] === 'all' ) {
                                     <div class="main">
 
                                         <ul class="st-taxonomy-tab">
-                                            <li class="taxonomy_general_tab active" data-content="taxonomy_general">
+                                            <li aria-current="true" class="taxonomy_general_tab active" data-content="taxonomy_general">
                                                 <a href="#taxonomy_general"><span><?php esc_html_e('General',
                                                             'simple-tags'); ?></span></a>
                                             </li>
 
-                                            <li class="taxonomy_posttypes_tab" data-content="taxonomy_posttypes">
+                                            <li aria-current="false" class="taxonomy_posttypes_tab" data-content="taxonomy_posttypes">
                                                 <a href="#taxonomy_posttypes"><span><?php esc_html_e('Post Types',
                                                             'simple-tags'); ?></span></a>
                                             </li>
 
-                                            <li class="taxonomy_permalinks_tab" data-content="taxonomy_permalinks">
+                                            <li aria-current="false" class="taxonomy_permalinks_tab" data-content="taxonomy_permalinks">
                                                 <a href="#taxonomy_permalinks"><span><?php esc_html_e('Permalinks',
                                                             'simple-tags'); ?></span></a>
                                             </li>
 
-                                            <li class="taxonomy_menus_tab" data-content="taxonomy_menus">
+                                            <li aria-current="false" class="taxonomy_menus_tab" data-content="taxonomy_menus">
                                                 <a href="#taxonomy_menus"><span><?php esc_html_e('Admin Area',
                                                             'simple-tags'); ?></span></a>
                                             </li>
 
-                                            <li class="taxonomy_labels_tab" data-content="taxonomy_labels">
+                                            <li aria-current="false" class="taxonomy_labels_tab" data-content="taxonomy_labels">
                                                 <a href="#taxonomy_labels"><span><?php esc_html_e('Other Labels',
                                                             'simple-tags'); ?></span></a>
                                             </li>
 
-                                            <li class="taxonomy_restapi_tab" data-content="taxonomy_restapi">
+                                            <li aria-current="false" class="taxonomy_restapi_tab" data-content="taxonomy_restapi">
                                                 <a href="#taxonomy_restapi"><span><?php esc_html_e('REST API',
                                                             'simple-tags'); ?></span></a>
                                             </li>
 
-                                            <li class="taxonomy_advanced_tab" data-content="taxonomy_advanced">
+                                            <li aria-current="false" class="taxonomy_advanced_tab" data-content="taxonomy_advanced">
                                                 <a href="#taxonomy_advanced"><span><?php esc_html_e('Advanced',
                                                             'simple-tags'); ?></span></a>
                                             </li>
 
                                             <?php if( $taxonomy_edit && !$external_edit ){ ?>
-                                            <li class="taxonomy_slug_tab" data-content="taxonomy_slug">
+                                            <li aria-current="false" class="taxonomy_slug_tab" data-content="taxonomy_slug">
                                                 <a href="#taxonomy_slug"><span><?php esc_html_e('Slug',
                                                             'simple-tags'); ?></span></a>
                                             </li>
                                             <?php } ?>
 
                                             <?php if($taxonomy_edit){ ?>
-                                            <li class="taxonomy_templates_tab" data-content="taxonomy_templates">
+                                            <li aria-current="false" class="taxonomy_templates_tab" data-content="taxonomy_templates">
                                                 <a href="#taxonomy_templates"><span><?php esc_html_e('Templates',
                                                             'simple-tags'); ?></span></a>
                                             </li>
                                             <?php } ?>
 
                                             <?php if (!empty($_GET) && !empty($_GET['action']) && 'edit' === $_GET['action']) { ?>
-                                            <li class="taxonomy_delete_tab" data-content="taxonomy_delete">
+                                            <li aria-current="false" class="taxonomy_delete_tab" data-content="taxonomy_delete">
                                                 <a href="#taxonomy_delete"><span><?php esc_html_e('Deactivate or Delete',
                                                             'simple-tags'); ?></span></a>
                                             </li>
@@ -1380,7 +1380,7 @@ if ( isset($_GET['taxonomy_type']) && $_GET['taxonomy_type'] === 'all' ) {
                                                     'namearray'  => 'cpt_custom_tax',
                                                     'name'       => 'show_in_rest',
                                                     'labeltext'  => esc_html__('Show in REST API', 'simple-tags'),
-                                                    'aftertext'  => '',
+                                                    'aftertext'  => esc_attr__('Add the taxonomy to the WordPress wp-json API.', 'simple-tags'),
                                                     'selections' => $select,// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                                                 ]);
 
@@ -1389,8 +1389,7 @@ if ( isset($_GET['taxonomy_type']) && $_GET['taxonomy_type'] === 'all' ) {
                                                     'namearray' => 'cpt_custom_tax',
                                                     'name'      => 'rest_base',
                                                     'labeltext' => esc_html__('REST API base slug', 'simple-tags'),
-                                                    'helptext'  => esc_attr__('Slug to use in REST API URLs.',
-                                                        'simple-tags'),
+                                                    'helptext'  => esc_attr__('The base slug that this taxonomy will use in the REST API.', 'simple-tags'),
                                                     'textvalue' => isset($current['rest_base']) ? esc_attr($current['rest_base']) : '',
                                                 ]);
 
@@ -1400,6 +1399,7 @@ if ( isset($_GET['taxonomy_type']) && $_GET['taxonomy_type'] === 'all' ) {
                                                     'name'      => 'rest_controller_class',
                                                     'labeltext' => esc_html__('REST API controller class',
                                                         'simple-tags'),
+                                                    'helptext'  => esc_attr__('The name of a custom Rest Controller class instead of WP_REST_Terms_Controller.', 'simple-tags'),
                                                     'aftertext' => esc_attr__('Custom controller to use instead of WP_REST_Terms_Controller.',
                                                         'simple-tags'),
                                                     'textvalue' => isset($current['rest_controller_class']) ? esc_attr($current['rest_controller_class']) : '',
